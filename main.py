@@ -1,9 +1,8 @@
 import sys
-
 import openai.error
+import threading
 
 from backend import Chatbot
-
 from PyQt6.QtWidgets import QMainWindow, QTextEdit, QLineEdit, QPushButton, QApplication, QMessageBox
 
 
@@ -50,6 +49,10 @@ class ChatbotWindow(QMainWindow):
             return
         self.chatArea.append(f"<p style='color:#E9E9E9'>Me: {user_input}</p>")
         self.inputField.clear()
+        thread = threading.Thread(target=self.get_bot_response, args=(user_input, ))
+        thread.start()
+
+    def get_bot_response(self, user_input):
         try:
             response = self.chat.get_response(user_input)
             self.chatArea.append(f"<p style='color:#333333; background-color:#E9E9E9'>Bot: {response}</p>")
