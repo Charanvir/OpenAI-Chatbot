@@ -48,11 +48,11 @@ class ChatbotWindow(QMainWindow):
             error_widget.setText("Input was empty.")
             error_widget.exec()
             return
-        self.chatArea.append(f"Me: {user_input}")
+        self.chatArea.append(f"<p style='color:#E9E9E9'>Me: {user_input}</p>")
         self.inputField.clear()
         try:
             response = self.chat.get_response(user_input)
-            self.chatArea.append(f"Bot: {response}")
+            self.chatArea.append(f"<p style='color:#333333; background-color:#E9E9E9'>Bot: {response}</p>")
         except openai.error.RateLimitError or openai.error.APIError:
             error_widget = QMessageBox()
             error_widget.setWindowTitle("Error")
