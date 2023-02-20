@@ -32,7 +32,10 @@ class ChatbotWindow(QMainWindow):
         # Used for smaller text
         self.inputField = QLineEdit(self)
         self.inputField.setGeometry(10, 340, 480, 40)
+        # Allow enter key to run method
+        self.inputField.returnPressed.connect(self.send_message)
 
+        # Add button
         self.button = QPushButton("Send", self)
         self.button.setGeometry(500, 340, 100, 40)
         self.button.clicked.connect(self.send_message)
